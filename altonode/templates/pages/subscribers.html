@@ -1,0 +1,8 @@
+{% if active_project %}
+	{% for subcriber in subscribers %}
+		{{ subscriber.organization }} | 		
+	{% endfor %}
+{% else %}
+	Corporate
+{% endif %}
+	

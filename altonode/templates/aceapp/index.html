@@ -1,0 +1,353 @@
+{% extends 'aceapp/base.html' %}
+{% load static i18n %}
+{% load rest_framework %}
+{% load leaflet_tags %}
+
+{% block body_block %}
+   <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Altonode Networks</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#workflow">Workflow</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#location">Locate</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead">
+      <div class="container">
+        <div class="intro-text">
+		  <div class="intro-lead-in">Gateway to the Cloud!</div>
+          <div class="intro-heading">Managed Cloud Services</div>
+          <a class="btn btn-xl js-scroll-trigger" href="#services">Tell Me More</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Services -->
+    <section id="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Services</h2>
+            <h3 class="section-subheading text-muted">Web Service Delivery</h3>
+          </div>
+        </div>
+        <div class="row text-center">
+		{% if services %}
+			{% for service in services %}
+				<div class="col-md-4">
+					<span class="fa-stack fa-4x">
+						<i class="fa fa-circle fa-stack-2x text-primary"></i>
+						<i class="fa fa-{{service.fa_icon}} fa-stack-1x fa-inverse"></i>
+					</span>
+					<h4 class="service-heading">{{ service.type }}</h4>
+					<p class="text-muted">{{service.details}}</p>
+				</div>
+			{% endfor %}
+		{% else %}
+			<h4 class="service-heading text-centre">Cloud Networks</h4>
+		{% endif %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section class="bg-light" id="portfolio">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Portfolio</h2>
+            <h3 class="section-subheading text-muted">Projects Implemented</h3>
+          </div>
+        </div>
+        <div class="row">
+			{% if portfolios %}
+				{% for portfolio in portfolios %}
+					<div class="col-md-4 col-sm-6 portfolio-item">
+						<a class="portfolio-link" data-toggle="modal" href="#{{portfolio.slug}}">
+							<div class="portfolio-hover">
+								<div class="portfolio-hover-content">
+									<i class="fa fa-plus fa-3x"></i>
+								</div>
+							</div>
+							<img class="img-fluid" src="{{MEDIA_URL}}{{portfolio.snapshot}}" 
+							width="400" height="300" alt="{{portfolio.description}}">
+						</a>
+						<div class="portfolio-caption">
+							<h4>{{portfolio.name}}</h4>
+							<p class="text-muted">{{portfolio.type}}</p>
+						</div>
+					</div>
+				{% endfor %}
+			{% else %}
+				<div class="portfolio-caption">
+					<h4>Django Web Apps</h4>
+				</div>
+			{% endif %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Workflow -->
+    <section id="workflow">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Project Workflow</h2>
+            <h3 class="section-subheading text-muted">Project development process..</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="timeline">
+              <li>
+                <div class="timeline-image">
+                  <img class="rounded-circle img-fluid" src="{% static 'images/about/1.jpeg' %}" alt="">
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4>PART A</h4>
+                    <h4 class="subheading">Project Conception</h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p class="text-muted">Design brief & system architecture described to establsh requirements.
+					Technologies used at various tiers specified. Wireframes & screenshots illustrate what the project should look like when complete.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-inverted">
+                <div class="timeline-image">
+                  <img class="rounded-circle img-fluid" src="{% static 'images/about/2.jpeg' %}" alt="">
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4>PART B</h4>
+                    <h4 class="subheading">App Configuration & Build</h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p class="text-muted">Project code pushed to a version control system considering best practices such as The Twelve-Factor App. 
+					Open source & vendor dependencies fetched. Deploy configurations set in readiness for release.</p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="timeline-image">
+                  <img class="rounded-circle img-fluid" src="{% static 'images/about/3.jpeg' %}" alt="">
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4>PART C</h4>
+                    <h4 class="subheading">Automated Tests & Release</h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p class="text-muted">Tests written and run to ensure software is robust. Quality tests identify and prevent problems. 
+					Web application released in production environment once tests passed.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-inverted">
+                <div class="timeline-image">
+                  <img class="rounded-circle img-fluid" src="{% static 'images/about/4.jpeg' %}" alt="">
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4>PART D</h4>
+                    <h4 class="subheading">Deployment & Hosting</h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p class="text-muted">Web-based application deployed on a Platform as a Service (PaaS).
+					PaaS chosen according to budget, seurity, compliance and project requirements.
+					Web applications hosted on a single or multi-server setup.</p>
+                  </div>
+                </div>
+              </li>
+               <li>
+                <div class="timeline-image">
+                  <img class="rounded-circle img-fluid" src="{% static 'images/about/5.jpeg' %}" alt="">
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4>PART E</h4>
+                    <h4 class="subheading">Continuous Integration</h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p class="text-muted">Continual project testing & building ensures safer deploys and more robust apps.
+					Integration errors quickly detected and resolved using comprehensive tests & tools such as Jenkins.
+					</p>
+                  </div>
+                </div>
+              </li>
+			  <li class="timeline-inverted">
+				<a class="navbar-brand js-scroll-trigger" href="#contact">
+                  <div class="timeline-image">
+                    <h4>Be Part
+                      <br>Of Our
+                      <br>Story!			    
+                    </h4>
+				  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="bg-light" id="team">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Our Amazing Team</h2>
+            <h3 class="section-subheading text-muted">Teamwork makes the dream work!</h3>
+          </div>
+        </div>
+        <div class="row">
+			{% if team %}
+				{% for resource in team %}
+				  <div class="col-sm-4">
+					<div class="team-member">
+					  <img class="mx-auto rounded-circle" src="{{MEDIA_URL}}{{resource.avatar}}" alt="">
+						<h4>{{resource.user}}</h4>
+							  <p class="text-muted">{{resource.designation}}</p>
+							  <ul class="list-inline social-buttons">
+								<li class="list-inline-item">
+								  <a href="#">
+									<i class="fa fa-facebook"></i>
+								  </a>
+								</li>
+							  <li class="list-inline-item">
+								<a href="{{resource.profile}}">
+								  <i class="fa fa-github"></i>
+								</a>
+							  </li>
+							  <li class="list-inline-item">
+								<a href="#">
+								  <i class="fa fa-linkedin"></i>
+								</a>
+							  </li>
+							  </ul>
+					</div>
+				  </div>
+				{% endfor %}
+			{% else %}
+				<div class="row">
+				  <div class="col-lg-8 mx-auto text-center">
+					<p class="large text-muted">Altonode Networks Team</p>
+				  </div>
+				</div>			
+			{% endif %}
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section id="location">	
+	  <div class="col-lg-12 text-center">
+	    <h2 class="section-heading">Location</h2>
+		<h3 class="section-subheading text-muted">Moi Avenue, Apollo Courts, Ground Floor Rm 1.</h3>
+      </div>
+	  
+	  {% leaflet_map "main" callback="main_map_init" %}
+		  
+      <script type="text/javascript">
+	    function main_map_init (map, options) {
+		  var dataurl = '{% url "world:data" %}';
+		  // Download GeoJSON via Ajax
+		  $.getJSON(dataurl, function (data) {
+	        console.log(data);
+			// Add GeoJSON layer
+			L.geoJson(data).addTo(map);
+		  });
+        }
+      </script>		  
+    </section>
+
+	<!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Subscribe</h2>
+            <h3 class="section-subheading text-muted">Subscribe for free.</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <form id="contactForm" name="sentMessage" action="{% url 'aceapp:home_rest_api' %}" method="post" novalidate>
+			  <div class="row">
+                {% csrf_token %}
+                {% render_form serializer template_pack='rest_framework/altonode_customs' %}  
+  			    <div class="clearfix"></div>
+				<div class="col-lg-12 text-center">
+				  <div id="success"></div>
+				  <button id="sendMessageButton" class="btn btn-xl" type="submit">Subscribe</button>
+				</div>                
+			  </div>
+			</form>	
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Portfolio Modals -->
+    <!-- Modals -->
+	{% if portfolios %}
+		{% for portfolio in portfolios %}
+			<div class="portfolio-modal modal fade" id="{{portfolio.slug}}" tabindex="-1" role="dialog" aria-hidden="true">
+			  <div class="modal-dialog">
+				<div class="modal-content">
+				  <div class="close-modal" data-dismiss="modal">
+					<div class="lr">
+					  <div class="rl"></div>
+					</div>
+				  </div>
+				  <div class="container">
+					<div class="row">
+					  <div class="col-lg-8 mx-auto">
+						<div class="modal-body">
+						  <!-- Project Details Go Here -->
+						  <h2>{{portfolio.name}}</h2>
+						  <p class="item-intro text-muted">{{portfolio.type}}</p>
+						  <img class="img-fluid d-block mx-auto" src="{{MEDIA_URL}}{{portfolio.screenshot}}" 
+						  width="640" height="960" alt="">
+						  <p>{{portfolio.description}}</p>
+						  <ul class="list-inline">
+							<li>Date: {{portfolio.created}}</li>
+							<li><a href="{{portfolio.platform}}">Link</a></li>
+						  </ul>
+						  <button class="btn btn-primary" data-dismiss="modal" type="button">
+							<i class="fa fa-times"></i>
+							Close Project</button>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
