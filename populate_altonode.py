@@ -15,7 +15,7 @@ def populate():
 	custom_apps = [
 		{
 			"name": "Rango",
-			"description": "Categories application deployed on pythonanywhere PaaS. It registers and authenticates users enabling access to additional features of the web application.",
+			"description": "Categories application deployed on pythonanywhere PaaS. It registers and authenticates users enabling access to additional features of the app.",
 			"platform":	"https://tonyops.pythonanywhere.com"
 		},
 	]
@@ -23,13 +23,18 @@ def populate():
 	web_apis = [
 		{
 			"name": "Online Signing",
-			"description": "E-signature application for online document signing. The email app sends documents signed by authorized users to concerned parties while the storage app saves a copy of the transaction in the cloud.",
-			"platform":	"https://altonodemo.pythonanywhere.com"
+			"description": "E-signature application for online document signing. The email app sends copies signed by authorized users to concerned parties while the storage app saves a copy of the transaction in the cloud.",
+			"platform":	"https://github.com/altonode/signapp"
 		},
 		{
-			"name": "drf_demo",
+			"name": "Blog Posts API",
 			"description": "Django Rest Framework app for handling blog posts.",
-			"platform":	"https://github.com"
+			"platform":	"https://github.com/altonode/blogapi"
+		},
+		{
+			"name": "Games API",
+			"description": "A RESTful Web API that performs CRUD (Create, Read, Update and Delete) operations on an SQL database.",
+			"platform":	"https://gamesapi.pythonanywhere.com"
 		},
 	]
 		
