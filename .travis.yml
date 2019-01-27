@@ -11,7 +11,7 @@ before_install:
 install: pip install -r requirements/test.txt
 
 # run tests
-script: tests.py
+script: altonode\aceapp\tests.py
 
 language: python
 python:
