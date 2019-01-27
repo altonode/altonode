@@ -306,10 +306,6 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
 ADMIN_URL = r'^admin/'
 
-# easy_maps custom settings
-EASY_MAPS_GOOGLE_MAPS_API_KEY = env('DJANGO_GOOGLE_MAPS_JAVASCRIPT_API_KEY')
-EASY_MAPS_CENTER = (-4.06084, 39.65833)
-
 # Django-leaflet configs
 LEAFLET_CONFIG = {
 	'DEFAULT_CENTER': (-4.060545671523404, 39.658783078193665),
